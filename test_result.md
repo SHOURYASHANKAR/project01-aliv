@@ -101,3 +101,146 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test the Habit Flow habit tracker app functionality including dashboard, adding habits, completing habits, dark mode, navigation, calendar, statistics, and export/import features"
+
+frontend:
+  - task: "Dashboard View"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/dashboard/Dashboard.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify dashboard loads with greeting, stats cards, Today's Habits section, and This Week chart"
+
+  - task: "Add Habit"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/habits/HabitDialog.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify Add First Habit/Add Habit button, form filling, category selection, and habit creation"
+
+  - task: "Complete Habit"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/dashboard/TodayProgress.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify habit completion via checkbox and stats update"
+
+  - task: "Dark Mode Toggle"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/layout/Header.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify moon/sun icon toggle between light and dark mode"
+
+  - task: "Navigation"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/layout/Sidebar.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify sidebar navigation between Dashboard, My Habits, Calendar, and Statistics views"
+
+  - task: "My Habits View"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/habits/HabitList.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify habit cards with weekly checkboxes, category pills, and completion functionality"
+
+  - task: "Calendar View"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/calendar/CalendarView.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify calendar navigation and habit filter dropdown"
+
+  - task: "Statistics View"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/stats/StatisticsView.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify charts load (Monthly Completion Trend, Habits by Category) and Habit Performance table"
+
+  - task: "Export/Import"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/layout/Header.jsx"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify backup feature via download icon and Export Data functionality"
+
+  - task: "Mobile Responsiveness"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify mobile responsiveness at 375px width"
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+
+test_plan:
+  current_focus:
+    - "Dashboard View"
+    - "Add Habit"
+    - "Complete Habit"
+    - "Navigation"
+    - "My Habits View"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "testing"
+    message: "Starting comprehensive testing of Habit Flow app. Will test all core functionality including dashboard, habit management, navigation, and responsive design."
