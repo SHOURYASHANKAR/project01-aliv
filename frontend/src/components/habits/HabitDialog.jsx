@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -42,20 +42,19 @@ export const HabitDialog = ({
   editHabit = null 
 }) => {
   const { categories, addHabit, updateHabit } = useHabits();
-  const prevOpenRef = useRef(open);
   
   const [formData, setFormData] = useState(() => getInitialFormData(editHabit));
   const [errors, setErrors] = useState({});
 
-  // Reset form when dialog opens
-  if (open && !prevOpenRef.current) {
-    const newData = getInitialFormData(editHabit);
-    if (JSON.stringify(newData) !== JSON.stringify(formData)) {
-      setFormData(newData);
+  // Reset form when dialog opens or editHabit changes
+  useEffect(() => {
+    if (open) {
+      setFormData(getInitialFormData(editHabit));
       setErrors({});
     }
-  }
-  prevOpenRef.current = open;
+    // Only re-run when open changes to true or when editHabit changes while open
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, editHabit?.id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
