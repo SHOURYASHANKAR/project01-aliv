@@ -1,53 +1,62 @@
-import { useEffect } from "react";
+import React, { useState } from 'react';
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import { HabitProvider } from '@/context/HabitContext';
+import { Header } from '@/components/layout/Header';
+import { Sidebar } from '@/components/layout/Sidebar';
+import { Dashboard } from '@/components/dashboard/Dashboard';
+import { HabitList } from '@/components/habits/HabitList';
+import { CalendarView } from '@/components/calendar/CalendarView';
+import { StatisticsView } from '@/components/stats/StatisticsView';
+import { Toaster } from '@/components/ui/sonner';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const AppContent = () => {
+  const [currentView, setCurrentView] = useState('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
+  const renderView = () => {
+    switch (currentView) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'habits':
+        return <HabitList />;
+      case 'calendar':
+        return <CalendarView />;
+      case 'stats':
+        return <StatisticsView />;
+      default:
+        return <Dashboard />;
     }
   };
 
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
+    <div className="min-h-screen bg-background">
+      <Header onOpenSidebar={() => setSidebarOpen(true)} />
+      
+      <div className="flex">
+        <Sidebar
+          currentView={currentView}
+          onViewChange={setCurrentView}
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+        />
+        
+        <main className="flex-1 min-h-[calc(100vh-56px)] overflow-auto">
+          <div className="container max-w-6xl mx-auto p-4 md:p-6 lg:p-8">
+            {renderView()}
+          </div>
+        </main>
+      </div>
+      
+      <Toaster position="bottom-right" />
     </div>
   );
 };
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <HabitProvider>
+      <AppContent />
+    </HabitProvider>
   );
 }
 
