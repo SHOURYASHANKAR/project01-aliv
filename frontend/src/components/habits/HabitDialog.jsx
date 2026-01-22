@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -30,39 +30,32 @@ const CATEGORY_STYLES = {
   learning: 'bg-[hsl(45_90%_90%)] text-[hsl(45_90%_35%)]',
 };
 
+const getInitialFormData = (editHabit) => ({
+  name: editHabit?.name || '',
+  categoryId: editHabit?.categoryId || 'personal',
+  note: editHabit?.note || '',
+});
+
 export const HabitDialog = ({ 
   open, 
   onOpenChange, 
   editHabit = null 
 }) => {
   const { categories, addHabit, updateHabit } = useHabits();
+  const prevOpenRef = useRef(open);
   
-  const [formData, setFormData] = useState({
-    name: '',
-    categoryId: 'personal',
-    note: '',
-  });
+  const [formData, setFormData] = useState(() => getInitialFormData(editHabit));
   const [errors, setErrors] = useState({});
 
-  // Reset form when dialog opens/closes or edit habit changes
-  useEffect(() => {
-    if (open) {
-      if (editHabit) {
-        setFormData({
-          name: editHabit.name,
-          categoryId: editHabit.categoryId || 'personal',
-          note: editHabit.note || '',
-        });
-      } else {
-        setFormData({
-          name: '',
-          categoryId: 'personal',
-          note: '',
-        });
-      }
+  // Reset form when dialog opens
+  if (open && !prevOpenRef.current) {
+    const newData = getInitialFormData(editHabit);
+    if (JSON.stringify(newData) !== JSON.stringify(formData)) {
+      setFormData(newData);
       setErrors({});
     }
-  }, [open, editHabit]);
+  }
+  prevOpenRef.current = open;
 
   const handleSubmit = (e) => {
     e.preventDefault();

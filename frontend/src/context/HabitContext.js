@@ -50,12 +50,16 @@ export const HabitProvider = ({ children }) => {
     loadData();
   }, []);
 
-  // Update stats when habits or completions change
-  useEffect(() => {
-    if (!isLoading) {
-      setStats(getStats());
-    }
+  // Update stats when habits or completions change - using useMemo pattern
+  const currentStats = React.useMemo(() => {
+    if (isLoading) return stats;
+    return getStats();
   }, [habits, completions, isLoading]);
+  
+  // Sync stats state with calculated value
+  if (!isLoading && currentStats !== stats) {
+    setStats(currentStats);
+  }
 
   // Theme management
   useEffect(() => {

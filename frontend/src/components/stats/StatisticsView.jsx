@@ -34,6 +34,23 @@ const COLORS = [
   'hsl(45, 90%, 50%)',   // Yellow
 ];
 
+// Custom tooltip component - defined outside to prevent recreation
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-card border border-border rounded-lg shadow-lg p-3">
+        <p className="text-sm font-medium text-foreground">{label}</p>
+        {payload.map((entry, index) => (
+          <p key={index} className="text-xs text-muted-foreground">
+            {entry.name}: {entry.value}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};
+
 export const StatisticsView = () => {
   const { habits, completions, categories, stats } = useHabits();
 
@@ -112,23 +129,6 @@ export const StatisticsView = () => {
 
   // Best performing habit
   const bestHabit = habitPerformance[0];
-
-  // Custom tooltip for charts
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-card border border-border rounded-lg shadow-lg p-3">
-          <p className="text-sm font-medium text-foreground">{label}</p>
-          {payload.map((entry, index) => (
-            <p key={index} className="text-xs text-muted-foreground">
-              {entry.name}: {entry.value}
-            </p>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
 
   if (habits.length === 0) {
     return (
