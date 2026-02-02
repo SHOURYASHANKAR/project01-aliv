@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useHabits } from '@/context/HabitContext';
 import { StatsCard } from './StatsCard';
+import { FocusCard } from './FocusCard';
 import { TodayProgress } from './TodayProgress';
 import { StreakLeaderboard } from './StreakLeaderboard';
 import { WeeklyChart } from './WeeklyChart';
@@ -122,6 +123,7 @@ export const Dashboard = () => {
         
         {/* Sidebar - Streak Leaderboard */}
         <div className="space-y-6">
+          <FocusCard />
           <StreakLeaderboard />
         </div>
       </div>
