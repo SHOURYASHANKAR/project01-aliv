@@ -1,93 +1,261 @@
-/* Habit Flow - Global Styles */
-
-/* Ensure proper box-sizing */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  font-family: "Inter", "Segoe UI", sans-serif;
 }
 
-/* Remove default margins */
 body {
   margin: 0;
   padding: 0;
+  background: #0f0c29;
+  color: #f8f6ff;
   overflow-x: hidden;
 }
 
-/* Custom selection colors */
 ::selection {
-  background-color: hsl(145 35% 42% / 0.2);
+  background-color: rgba(250, 214, 100, 0.3);
   color: inherit;
 }
 
-/* Focus styles */
 :focus-visible {
-  outline: 2px solid hsl(var(--ring));
-  outline-offset: 2px;
+  outline: 2px solid rgba(255, 231, 138, 0.9);
+  outline-offset: 3px;
 }
 
-/* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
 
-/* Container responsiveness */
-.container {
+.game-app {
+  min-height: 100vh;
+  padding: 48px 20px 64px;
+  background: radial-gradient(circle at top, #3b1d60 0%, #1b143f 45%, #0f0c29 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.game-hero {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.game-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  margin: 12px 0 12px;
+  letter-spacing: 0.02em;
+}
+
+.game-hero p {
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.game-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: #ffd770;
+  margin: 0;
+}
+
+.game-panel {
+  max-width: 1100px;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr) minmax(0, 280px);
+  gap: 24px;
 }
 
-/* Habit checkbox animation */
-@keyframes checkmark-draw {
-  0% {
-    stroke-dashoffset: 24;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
+.player-card,
+.game-stage,
+.sidebar-card {
+  background: rgba(24, 21, 53, 0.9);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 40px rgba(6, 5, 15, 0.35);
 }
 
-/* Card hover effects */
-.card-hover {
+.player-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.player-card label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.player-card input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.player-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.player-stats div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  background: rgba(10, 10, 22, 0.4);
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.player-stats span {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.player-stats strong {
+  font-size: 1.1rem;
+  color: #ffd770;
+}
+
+.game-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.badge {
+  background: rgba(255, 215, 112, 0.18);
+  color: #ffd770;
+  padding: 4px 12px;
+  border-radius: 999px;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.game-status p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.challenge-card {
+  background: linear-gradient(135deg, rgba(92, 67, 214, 0.6), rgba(255, 215, 112, 0.25));
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.challenge-card h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.blessing-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.choices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.choice-button {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.choice-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.choice-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.game-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.sidebar-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+.sidebar-card.highlight {
+  background: rgba(255, 215, 112, 0.12);
+  border-color: rgba(255, 215, 112, 0.4);
+}
+
+.primary-button {
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: none;
+  background: #ffd770;
+  color: #1d1035;
+  font-weight: 700;
+  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card-hover:hover {
-  transform: translateY(-2px);
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(255, 215, 112, 0.3);
 }
 
-/* Smooth scrollbar for webkit browsers */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--border));
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(var(--muted-foreground));
-}
-
-/* Dark mode scrollbar */
-.dark ::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--border));
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(var(--muted-foreground));
+@media (max-width: 960px) {
+  .game-panel {
+    grid-template-columns: 1fr;
+  }
 }
